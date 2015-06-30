@@ -3,6 +3,8 @@ menu "Target packages"
 	source "package/busybox/Config.in"
 	source "package/skeleton/Config.in"
 
+	source "package/pi-blaster/Config.in"
+
 menu "Audio and video applications"
 	source "package/alsa-utils/Config.in"
 	source "package/aumix/Config.in"
