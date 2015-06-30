@@ -1,0 +1,7 @@
+config BR2_PACKAGE_PI_BLASTER
+	bool "pi-blaster"
+	help
+	  RaspberryPi support for PWM GPIO pins
+
+	  https://github.com/YesVideo/pi-blaster
+

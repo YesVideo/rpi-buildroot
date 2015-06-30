@@ -1,0 +1,41 @@
+#!/bin/sh
+#
+# Starts pi-blaster
+#
+
+# Allow a few customizations from a config file
+test -r /etc/default/pi-blaster && . /etc/default/pi-blaster
+
+start() {
+	echo -n "Starting pi-blaster: "
+	umask 077
+	start-stop-daemon -S -q -p /var/run/pi-blaster.pid \
+		--exec /usr/sbin/pi-blaster
+	[ $? = 0 ] && echo "OK" || echo "FAIL"
+}
+stop() {
+	echo -n "Stopping pi-blaster: "
+	start-stop-daemon -K -q -p /var/run/pi-blaster.pid
+	[ $? = 0 ] && echo "OK" || echo "FAIL"
+}
+restart() {
+	stop
+	start
+}
+
+case "$1" in
+  start)
+  	start
+	;;
+  stop)
+  	stop
+	;;
+  restart|reload)
+  	restart
+	;;
+  *)
+	echo "Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?
