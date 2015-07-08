@@ -16,6 +16,8 @@ PI_BLASTER_PRE_CONFIGURE_HOOKS += PI_BLASTER_RUN_AUTOGEN
 define PI_BLASTER_INSTALL_TARGET_CMDS
 	$(INSTALL) -D -m 755 package/pi-blaster/S50pi-blaster \
 		$(TARGET_DIR)/etc/init.d/S50pi-blaster
+	$(INSTALL) -D -m 755 $(@D)/pi-blaster \
+		$(TARGET_DIR)/usr/sbin
 endef
 
 $(eval $(autotools-package))
