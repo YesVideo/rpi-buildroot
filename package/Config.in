@@ -3,6 +3,7 @@ menu "Target packages"
 	source "package/busybox/Config.in"
 
 	source "package/pi-blaster/Config.in"
+	source "package/RTL8188C_8192C_wpa_supplicant_hostapd/Config.in"
 
 menu "Audio and video applications"
 	source "package/alsa-utils/Config.in"
