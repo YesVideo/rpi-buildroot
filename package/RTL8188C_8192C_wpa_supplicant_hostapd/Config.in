@@ -1,0 +1,7 @@
+config BR2_PACKAGE_RTL8188C_8192C_wpa_supplicant_hostapd
+	bool "Realtek hostapd"
+	help
+	  Realtek custom hostapd for 8188c/8192c chipsets
+
+	  https://github.com/YesVideo/RTL8188C_8192C_wpa_supplicant_hostapd
+
