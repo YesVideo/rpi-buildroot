@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# make sure dhcpd is running
+if pidof dhcpd > /dev/null
+then
+  break
+else
+  echo "Starting dhcpd"
+  /etc/init.d/S80dhcp-server start
+fi
