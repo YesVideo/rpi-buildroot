@@ -1,4 +1,4 @@
-config BR2_PACKAGE_RTL8188C_8192C_wpa_supplicant_hostapd
+config BR2_PACKAGE_RTL8188C_8192C_WPA_SUPPLICANT_HOSTAPD
 	bool "Realtek hostapd"
 	help
 	  Realtek custom hostapd for 8188c/8192c chipsets
