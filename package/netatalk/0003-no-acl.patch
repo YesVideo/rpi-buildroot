@@ -1,0 +1,21 @@
+--- netatalk-3.1.7/libatalk/util/unix.c.orig	2015-07-14 10:14:41.321000006 -0700
++++ netatalk-3.1.7/libatalk/util/unix.c	2015-07-14 10:14:33.221000126 -0700
+@@ -267,6 +267,10 @@
+  */
+ int ochmod(char *path, mode_t mode, const struct stat *st, int options)
+ {
++#ifdef HAVE_ACLS
++  return 0;
++#else
++
+     struct stat sb;
+ 
+     if (options & O_IGNORE)
+@@ -287,6 +291,7 @@
+     } else {
+         return chmod(path, mode);
+     }
++#endif /* HAVE_ACLS */
+ }
+ 
+ /* 
