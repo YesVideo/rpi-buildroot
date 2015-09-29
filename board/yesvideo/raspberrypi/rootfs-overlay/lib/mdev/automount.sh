@@ -6,18 +6,24 @@ DEVICE=`fdisk -l --bytes $ROOT_DEVICE | grep -e "^$ROOT_DEVICE" | sort -rnk 5 |h
 
 MOUNT="/media/usb"
 
-logger automount: ${ACTION} $RAW_DEVICE =\> $DEVICE
-
 case ${ACTION} in
     "add")
+        logger automount: add $RAW_DEVICE =\> $DEVICE
+
         # bail if device doesn't exist
         if [ ! -b ${DEVICE} ]; then exit 0; fi
 
         # bail if not a FAT partition
-        if ! dd if=${DEVICE} bs=512 count=1 2>/dev/null | grep -q "FAT"; then exit 0; fi
+        if ! dd if=${DEVICE} bs=512 count=1 2>/dev/null | grep -q "FAT"; then
+            logger automount: $DEVICE is not a FAT partition
+            exit 0
+        fi
 
         # bail if we're already mounted
-        if grep -q "^${DEVICE} ${MOUNT}" /proc/mounts; then exit 0; fi
+        if grep -q "^${DEVICE} ${MOUNT}" /proc/mounts; then
+            logger automount: $DEVICE already mounted
+            exit 0
+        fi
 
         # else first unmount the MOUNT
         umount ${MOUNT} 2>/dev/null
@@ -27,6 +33,8 @@ case ${ACTION} in
         ;;
 
     "remove")
+        logger automount: remove $RAW_DEVICE
+
         umount ${MOUNT} 2>/dev/null
         ;;
 
