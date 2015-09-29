@@ -1,7 +1,12 @@
 #!/bin/sh
 
-DEVICE=/dev/${MDEV}
+RAW_DEVICE=/dev/${MDEV}
+ROOT_DEVICE=`echo $RAW_DEVICE | sed -e 's/\([^0-9]*\).*/\1/'`
+DEVICE=`fdisk -l --bytes $ROOT_DEVICE | grep -e "^$ROOT_DEVICE" | sort -rnk 5 |head -1|cut -d ' ' -f 1`
+
 MOUNT="/media/usb"
+
+logger automount: ${ACTION} $RAW_DEVICE =\> $DEVICE
 
 case ${ACTION} in
     "add")
