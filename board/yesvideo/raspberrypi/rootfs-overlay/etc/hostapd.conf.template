@@ -1,0 +1,5 @@
+interface=wlan0
+driver=rtl871xdrv
+ssid=SSID
+hw_mode=g
+channel=6
